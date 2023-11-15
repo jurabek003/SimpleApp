@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.fragments.AuthFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/averia_serif_libre_light"
+        android:textColor="#001DC3"
+        android:text="Enter your tel number"
+        android:textSize="25sp" />
+
+    <com.vicmikhailau.maskededittext.MaskedEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="15dp"
+        android:background="@drawable/shape_edt"
+        android:inputType="number"
+        android:paddingVertical="15dp"
+        app:mask="+998 (##) ### ## ##"
+        android:hint="+998"
+        android:paddingStart="15dp"
+        />
+
+</LinearLayout>
