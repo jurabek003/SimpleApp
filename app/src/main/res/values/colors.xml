@@ -2,4 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="border_view">#D0D5DD</color>
+    <color name="border_view2">#2962FF</color>
+    <color name="invalid_code">#F04438</color>
+    <color name="enabled_false">#00B8D4</color>
+
+
 </resources>

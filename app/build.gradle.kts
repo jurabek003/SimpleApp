@@ -9,12 +9,12 @@ plugins {
 
 android {
     namespace = "uz.turgunboyevjurabek.simpleapp"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "uz.turgunboyevjurabek.simpleapp"
         minSdk = 21
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -94,5 +94,21 @@ dependencies {
      * PinView
      */
     implementation("io.github.chaosleung:pinview:1.4.4")
+
+    /**
+     * Glide for image loading
+     */
+    implementation ("com.github.bumptech.glide:glide:4.13.2")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.13.2")
+
+    /**
+     * SwipeRefreshLayout
+     */
+    implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+
+    /**
+     *  lottie animation
+     */
+    implementation ("com.airbnb.android:lottie:5.0.3")
 
 }

@@ -17,16 +17,29 @@
         android:textSize="25sp" />
 
     <com.vicmikhailau.maskededittext.MaskedEditText
+        android:id="@+id/edt_masc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="15dp"
-        android:background="@drawable/shape_edt"
+        android:background="@drawable/shape_edt2"
         android:inputType="number"
         android:paddingVertical="15dp"
         app:mask="+998 (##) ### ## ##"
         android:hint="+998"
         android:paddingStart="15dp"
         />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_continue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:text="Continue"
+        android:textSize="20sp"
+        android:backgroundTint="@color/enabled_false"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/aref_ruqaa"
+        android:paddingVertical="15dp"/>
+
 
 </LinearLayout>
