@@ -1,14 +1,24 @@
 package uz.turgunboyevjurabek.simpleapp.ui.fragments
 
 import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
+import com.google.firebase.FirebaseException
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.PhoneAuthCredential
+import com.google.firebase.auth.PhoneAuthOptions
+import com.google.firebase.auth.PhoneAuthProvider
 import uz.turgunboyevjurabek.simpleapp.R
 import uz.turgunboyevjurabek.simpleapp.databinding.FragmentVerificationBinding
+import java.util.concurrent.TimeUnit
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,6 +35,9 @@ class VerificationFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var auth: FirebaseAuth
+    lateinit var storedVerificationId:String
+    lateinit var resentToken: PhoneAuthProvider.ForceResendingToken
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,13 +54,79 @@ class VerificationFragment : Fragment() {
         // Inflate the layout for this fragment
 
 
+
         return binding.root
+    }
+
+    private fun sendVerificationCode(number:String){
+        val option=PhoneAuthOptions.newBuilder()
+            .setActivity(requireActivity())
+            .setPhoneNumber(number)
+            .setTimeout(60L,TimeUnit.SECONDS)
+            .setCallbacks(callback)
+            .build()
+        PhoneAuthProvider.verifyPhoneNumber(option)
+
+    }
+
+    private val callback=object :PhoneAuthProvider.OnVerificationStateChangedCallbacks(){
+        override fun onVerificationCompleted(p0: PhoneAuthCredential) {
+            Log.d(TAG, "onVerificationCompleted: Uraaa")
+          //  Toast.makeText(this@MainActivity2, "callback", Toast.LENGTH_SHORT).show()
+        }
+
+        override fun onVerificationFailed(p0: FirebaseException) {
+          //  Toast.makeText(this@MainActivity2, "No callback ${p0.message}", Toast.LENGTH_LONG).show()
+            Log.d(TAG, "onVerificationCompleted:Failed",p0)
+        }
+
+        override fun onCodeSent(p0: String, p1: PhoneAuthProvider.ForceResendingToken) {
+            Log.d(TAG, "onCodeSent: Kod jo'natilidi")
+            storedVerificationId=p0
+            resentToken=p1
+        }
+    }
+    private fun verifyCode(){
+        val code=binding.etVerificationCode.text.toString()
+        if (code.length==6){
+            binding.etVerificationCode.clearFocus()
+            val credential=PhoneAuthProvider.getCredential(storedVerificationId,code)
+            signInWithPhoneAuthCredential(credential)
+        }
+    }
+
+
+    fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+
+                } else {
+                    Toast.makeText(requireContext(), "Mufaqiyatsiz", Toast.LENGTH_SHORT).show()
+                    if (it.exception is FirebaseAuthInvalidCredentialsException) {
+                        Toast.makeText(
+                            requireContext(),
+                            "Kod hato kiritildi tekshirib qayta kiriting",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                }
+            }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        auth=FirebaseAuth.getInstance()
 
+        val number=arguments?.getString("key_number")
         edtWork()
+        sendVerificationCode(number.toString())
+
+
+        binding.etVerificationCode.addTextChangedListener {
+            verifyCode()
+        }
 
 
     }
