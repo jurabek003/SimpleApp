@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -40,8 +41,9 @@ class AuthFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnContinue.setOnClickListener {
-        if (binding.edtMasc.text?.isNotEmpty() == true && binding.edtMasc.text!!.length==19){
-            findNavController().navigate(R.id.verificationFragment)
+        if (binding.edtMasc.text?.isNotEmpty() == true){
+            val number:String=binding.edtMasc.text.toString()
+            findNavController().navigate(R.id.verificationFragment, bundleOf("key_number" to number))
             }
             Toast.makeText(requireContext(), "${binding.edtMasc.text!!.length}", Toast.LENGTH_SHORT).show()
         }
