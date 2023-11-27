@@ -1,11 +1,14 @@
 package uz.turgunboyevjurabek.simpleapp.ui.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import uz.turgunboyevjurabek.simpleapp.R
+import uz.turgunboyevjurabek.simpleapp.databinding.FragmentVerificationBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -18,6 +21,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class VerificationFragment : Fragment() {
+    private val binding by lazy { FragmentVerificationBinding.inflate(layoutInflater)}
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -35,9 +39,37 @@ class VerificationFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_verification, container, false)
+
+
+        return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        edtWork()
+
+
+    }
+    @SuppressLint("ResourceAsColor")
+    private fun edtWork(){
+        binding.etVerificationCode.setAnimationEnable(true)
+        val pinView=binding.etVerificationCode
+        binding.etVerificationCode.addTextChangedListener {
+
+            // Agar pinView bo'sh bo'lsa, lineColor rangini o'zgartirish
+            if(pinView.text.isNullOrEmpty()){
+                pinView.setLineColor(resources.getColor(R.color.border_view))
+                binding.btnContinue.setBackgroundColor(resources.getColor(R.color.enabled_false))
+            }else {
+                // Aks holda, yozilgan paytda lineColor rangini o'zgartirish
+                pinView.setLineColor(resources.getColor(R.color.border_view2))
+                binding.btnContinue.setBackgroundColor(resources.getColor(R.color.border_view2))
+            }
+
+        }
+
+    }
     companion object {
         /**
          * Use this factory method to create a new instance of

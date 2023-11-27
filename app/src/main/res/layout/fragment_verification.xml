@@ -1,14 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
     tools:context=".ui.fragments.VerificationFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <com.chaos.view.PinView
+        android:id="@+id/et_verification_code"
+        style="@style/PinWidget.PinView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:cursorVisible="true"
+        android:inputType="number"
+        android:textSize="20sp"
+        android:textColor="#0B2235"
+        app:cursorWidth="2dp"
+        app:itemCount="4"
+        app:itemHeight="46dp"
+        app:itemWidth="46dp"
+        app:itemRadius="15dp"
+        app:itemSpacing="20dp"
+        app:lineWidth="2dp"
+        app:lineColor="#D0D5DD"
+        app:viewType="rectangle"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_continue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:text="Continue"
+        android:backgroundTint="@color/enabled_false"
+        android:textSize="17sp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/aref_ruqaa"
+        android:paddingVertical="15dp"/>
+
+
+</LinearLayout>
