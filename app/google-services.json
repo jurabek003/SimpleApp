@@ -12,7 +12,20 @@
           "package_name": "uz.turgunboyevjurabek.simpleapp"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1015003505928-v5sbp99p9n8agc2cbs8rjliloekn6lj0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "uz.turgunboyevjurabek.simpleapp",
+            "certificate_hash": "3ec2dae5e511046eda00c172e698b837e10b7f6f"
+          }
+        },
+        {
+          "client_id": "1015003505928-f0mvhfm81mu2sctb2huq0a1hortj38ae.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDzE9KVbG3XyuxlSl9ahfoZ065dliiAvRg"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1015003505928-f0mvhfm81mu2sctb2huq0a1hortj38ae.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
