@@ -45,6 +45,21 @@ class VerificationFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+        auth=FirebaseAuth.getInstance()
+
+        val number=arguments?.getString("key_number")
+        edtWork()
+        sendVerificationCode(number.toString())
+
+
+        binding.etVerificationCode.addTextChangedListener {
+            verifyCode()
+        }
+
+
+
+
     }
 
     override fun onCreateView(
@@ -77,7 +92,7 @@ class VerificationFragment : Fragment() {
 
         override fun onVerificationFailed(p0: FirebaseException) {
           //  Toast.makeText(this@MainActivity2, "No callback ${p0.message}", Toast.LENGTH_LONG).show()
-            Log.d(TAG, "onVerificationCompleted:Failed",p0)
+            Log.d(TAG, "Vaayy  onVerificationCompleted:Failed",p0)
         }
 
         override fun onCodeSent(p0: String, p1: PhoneAuthProvider.ForceResendingToken) {
@@ -100,7 +115,7 @@ class VerificationFragment : Fragment() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
-
+                    Toast.makeText(requireContext(), "Successfully", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(requireContext(), "Mufaqiyatsiz", Toast.LENGTH_SHORT).show()
                     if (it.exception is FirebaseAuthInvalidCredentialsException) {
@@ -117,16 +132,6 @@ class VerificationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        auth=FirebaseAuth.getInstance()
-
-        val number=arguments?.getString("key_number")
-        edtWork()
-        sendVerificationCode(number.toString())
-
-
-        binding.etVerificationCode.addTextChangedListener {
-            verifyCode()
-        }
 
 
     }
